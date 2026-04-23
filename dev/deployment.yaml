@@ -15,6 +15,19 @@ spec:
       containers:
         - name: myapp
           resources: {}
-          image: nginx:stable
+          image: mrspex/helsingborg:mun-0.0.2
+          env:
+            - name: MYSQL_HOST
+              value: database
+            - name: MYSQL_USER
+              value: wordpress
+            - name: MYSQL_DATABASE
+              value: wordpress
+            - name: MYSQL_ROOT_PASSWORD
+              value: your_root_password
+            - name: MYSQL_PASSWORD
+              value: your_password
+            - name: PUBLIC_DOMAIN
+              value: localhost
           ports:
             - containerPort: 80
