@@ -15,7 +15,7 @@ spec:
       containers:
         - name: myapp
           resources: {}
-          image: mrspex/helsingborg:mun-0.0.2
+          image: mrspex/helsingborg:mun-0.0.1
           env:
             - name: MYSQL_HOST
               value: database
