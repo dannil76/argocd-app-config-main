@@ -17,6 +17,8 @@ spec:
           resources: {}
           image: mrspex/helsingborg:mun-0.0.2
           env:
+            - name: MYSQL_USER
+              value: wordpress
             - name: MYSQL_DATABASE
               value: wordpress
           ports:
