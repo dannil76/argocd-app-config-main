@@ -15,6 +15,6 @@ spec:
       containers:
         - name: myapp
           resources: {}
-          image: mrspex/helsingborg:municipio-0.0.1
+          image: mrspex/helsingborg:mun-0.0.2
           ports:
             - containerPort: 8080
