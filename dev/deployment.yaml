@@ -27,5 +27,7 @@ spec:
               value: your_root_password
             - name: MYSQL_PASSWORD
               value: your_password
+            - name: PUBLIC_DOMAIN
+              value: localhost
           ports:
             - containerPort: 80
