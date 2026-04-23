@@ -16,5 +16,8 @@ spec:
         - name: myapp
           resources: {}
           image: mrspex/helsingborg:mun-0.0.2
+          env:
+            - name: MYSQL_DATABASE
+              value: wordpress
           ports:
-            - containerPort: 8080
+            - containerPort: 80
