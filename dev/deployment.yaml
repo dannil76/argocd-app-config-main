@@ -18,15 +18,25 @@ spec:
           image: mrspex/helsingborg:mun-0.0.2
           env:
             - name: MYSQL_HOST
-              value: database
+              valueFrom:
+                secretKeyRef:
+                  name: mysql-secret
+                  key: MYSQL_HOST
             - name: MYSQL_USER
-              value: wordpress
+              valueFrom:
+                secretKeyRef:
+                  name: mysql-secret
+                  key: MYSQL_USER
             - name: MYSQL_DATABASE
-              value: wordpress
-            - name: MYSQL_ROOT_PASSWORD
-              value: your_root_password
+              valueFrom:
+                secretKeyRef:
+                  name: mysql-secret
+                  key: MYSQL_DATABASE
             - name: MYSQL_PASSWORD
-              value: your_password
+              valueFrom:
+                secretKeyRef:
+                  name: mysql-secret
+                  key: MYSQL_PASSWORD
             - name: PUBLIC_DOMAIN
               value: localhost
           ports:
