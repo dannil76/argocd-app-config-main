@@ -1,19 +1,19 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: myapp
+  name: mun-app
 spec:
   selector:
     matchLabels:
-      app: myapp
+      app: mun-app
   replicas: 1
   template:
     metadata:
       labels:
-        app: myapp
+        app: mun-app
     spec:
       containers:
-        - name: myapp
+        - name: mun-app
           resources: {}
           image: mrspex/helsingborg:mun-0.0.3
           env:
