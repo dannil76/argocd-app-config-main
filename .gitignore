@@ -1,1 +1,3 @@
 /.idea
+/scripts/apply-mrspex-sec.sh
+/scripts/apply-mun-mysql-sec.sh
