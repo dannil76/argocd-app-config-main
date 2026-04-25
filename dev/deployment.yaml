@@ -12,10 +12,12 @@ spec:
       labels:
         app: mun-app
     spec:
+      imagePullSecrets:
+        - name: dockerhub-creds
       containers:
         - name: mun-app
           resources: {}
-          image: mrspex/helsingborg:mun-0.0.3
+          image: mrspex/helsingborg:municipio-0.0.3
           env:
             - name: MYSQL_HOST
               valueFrom:
