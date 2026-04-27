@@ -40,6 +40,6 @@ spec:
                   name: mysql-secret
                   key: MYSQL_PASSWORD
             - name: PUBLIC_DOMAIN
-              value: localhost
+              value: municipio.internal
           ports:
             - containerPort: 80
