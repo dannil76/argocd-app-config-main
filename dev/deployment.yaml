@@ -41,5 +41,7 @@ spec:
                   key: MYSQL_PASSWORD
             - name: PUBLIC_DOMAIN
               value: localhost
+            - name: INSTALL_DEMO_DB
+              value: "false"
           ports:
             - containerPort: 80
