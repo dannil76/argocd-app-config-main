@@ -8,12 +8,14 @@ set -euo pipefail
 #   MYSQL_USER=<user> \
 #   MYSQL_PASSWORD=<password> \
 #   MYSQL_DATABASE=<database> \
+#   MYSQL_ROOT_PASSWORD=<root-password> \
 #   ./scripts/create-mysql-secret.sh
 
 : "${MYSQL_HOST:?Set MYSQL_HOST}"
 : "${MYSQL_USER:?Set MYSQL_USER}"
 : "${MYSQL_PASSWORD:?Set MYSQL_PASSWORD}"
 : "${MYSQL_DATABASE:?Set MYSQL_DATABASE}"
+: "${MYSQL_ROOT_PASSWORD:?Set MYSQL_ROOT_PASSWORD}"
 
 NAMESPACE="${NAMESPACE:-mun-app}"
 SECRET_NAME="${SECRET_NAME:-mysql-secret}"
@@ -26,6 +28,7 @@ kubectl create secret generic "$SECRET_NAME" \
   --from-literal=MYSQL_USER="$MYSQL_USER" \
   --from-literal=MYSQL_PASSWORD="$MYSQL_PASSWORD" \
   --from-literal=MYSQL_DATABASE="$MYSQL_DATABASE" \
+  --from-literal=MYSQL_ROOT_PASSWORD="$MYSQL_ROOT_PASSWORD" \
   --namespace="$NAMESPACE" \
   --dry-run=client -o yaml | kubectl apply -f -
 

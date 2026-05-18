@@ -1,45 +1,49 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: mun-app
+  name: mysql
 spec:
   selector:
     matchLabels:
-      app: mun-app
+      app: mysql
   replicas: 1
+  strategy:
+    type: Recreate
   template:
     metadata:
       labels:
-        app: mun-app
+        app: mysql
     spec:
       containers:
-        - name: mun-app
-          resources: {}
-          image: ghcr.io/dannil76/municipio-deployment-labs:latest
+        - name: mysql
+          image: mariadb:11
           env:
-            - name: MYSQL_HOST
+            - name: MYSQL_ROOT_PASSWORD
               valueFrom:
                 secretKeyRef:
                   name: mysql-secret
-                  key: MYSQL_HOST
-            - name: MYSQL_USER
-              valueFrom:
-                secretKeyRef:
-                  name: mysql-secret
-                  key: MYSQL_USER
+                  key: MYSQL_ROOT_PASSWORD
             - name: MYSQL_DATABASE
               valueFrom:
                 secretKeyRef:
                   name: mysql-secret
                   key: MYSQL_DATABASE
+            - name: MYSQL_USER
+              valueFrom:
+                secretKeyRef:
+                  name: mysql-secret
+                  key: MYSQL_USER
             - name: MYSQL_PASSWORD
               valueFrom:
                 secretKeyRef:
                   name: mysql-secret
                   key: MYSQL_PASSWORD
-            - name: PUBLIC_DOMAIN
-              value: municipio.internal
-            - name: INSTALL_DEMO_DB
-              value: "true"
           ports:
-            - containerPort: 80
+            - containerPort: 3306
+          volumeMounts:
+            - name: data
+              mountPath: /var/lib/mysql
+      volumes:
+        - name: data
+          persistentVolumeClaim:
+            claimName: mysql-data
