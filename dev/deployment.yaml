@@ -38,7 +38,7 @@ spec:
                   name: mysql-secret
                   key: MYSQL_PASSWORD
             - name: PUBLIC_DOMAIN
-              value: localhost
+              value: municipio.internal
             - name: INSTALL_DEMO_DB
               value: "false"
           ports:
