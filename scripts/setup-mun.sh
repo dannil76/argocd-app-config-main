@@ -19,7 +19,6 @@ usage() {
 create() {
   kubectl apply -f "$APP_MANIFEST"
   echo "ArgoCD Application '$APP_NAME' applied."
-  echo "Reminder: create the Docker Hub pull secret with create-dockerhub-secret.sh"
 }
 
 delete() {
