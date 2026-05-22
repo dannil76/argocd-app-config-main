@@ -15,7 +15,7 @@ spec:
       containers:
         - name: mun-app
           resources: {}
-          image: ghcr.io/dannil76/municipio-deployment-labs:sha-46a0a51
+          image: ghcr.io/dannil76/municipio-deployment-labs:latest
           env:
             - name: MYSQL_HOST
               valueFrom:
@@ -40,6 +40,6 @@ spec:
             - name: PUBLIC_DOMAIN
               value: municipio.internal
             - name: INSTALL_DEMO_DB
-              value: "true"
+              value: "false"
           ports:
             - containerPort: 80
