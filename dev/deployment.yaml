@@ -38,7 +38,7 @@ spec:
                   name: mysql-secret
                   key: MYSQL_PASSWORD
             - name: PUBLIC_DOMAIN
-              value: helsingborg.io
+              value: container.hbgstage.se
             - name: INSTALL_DEMO_DB
               value: "false"
           ports:
