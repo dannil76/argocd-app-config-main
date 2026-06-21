@@ -18,6 +18,6 @@ spec:
     spec:
       containers:
         - name: nginx
-          image: webbutvecklinghelsingborg/gitops:test-nginx-latest-0.0.1
+          image: webbutvecklinghelsingborg/gitops:openlitespeed-0.0.3
           ports:
             - containerPort: 80
