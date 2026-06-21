@@ -16,6 +16,8 @@ spec:
       labels:
         app: nginx
     spec:
+      imagePullSecrets:
+        - name: dockerhub-secret
       containers:
         - name: nginx
           image: webbutvecklinghelsingborg/gitops:openlitespeed-0.0.3
