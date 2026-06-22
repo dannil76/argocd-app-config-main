@@ -1,0 +1,46 @@
+# echoserver
+# Exposes the already-running echoserver Deployment over HTTPS through the
+# managed NGINX ingress, with a Let's Encrypt certificate issued automatically
+# by the managed cert-manager.
+#
+# Confirm these four things before applying:
+#   1. kubectl get ingressclass
+#        -> the name goes in spec.ingressClassName below (almost certainly "nginx")
+#   2. kubectl get clusterissuer
+#        -> start with letsencrypt-staging; switch to letsencrypt-prod once it works
+#   3. kubectl get deployment echoserver -o jsonpath='{.spec.selector.matchLabels}{"\n"}'
+#      kubectl get deployment echoserver -o jsonpath='{.spec.template.spec.containers[*].ports}{"\n"}'
+#        -> the Service selector AND targetPort below must match these exactly
+#   4. kubectl get svc -n elx-ingress-nginx
+#        -> note the ingress public IP, then point a DNS A record (echo.example.com)
+#           at it. Without this, the Let's Encrypt HTTP-01 challenge cannot pass.
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: echoserver-ingress
+  namespace: default
+  annotations:
+    # This single line wires in cert-manager. Switch to "letsencrypt-prod"
+    # once a staging cert reaches READY: True.
+    cert-manager.io/cluster-issuer: "letsencrypt-prod"
+    nginx.ingress.kubernetes.io/backend-protocol: "HTTP"      # server is now plain HTTP
+    nginx.ingress.kubernetes.io/force-ssl-redirect: "true"
+    nginx.ingress.kubernetes.io/proxy-body-size: "0"          # large diffs/syncs
+spec:
+  ingressClassName: nginx                  # from step 1
+  tls:
+    - hosts:
+        - testapp.elx.helsingborg.io       # your real (sub)domain, DNS pointed at the ingress IP
+      secretName: echoserver-tls           # cert-manager creates and fills this Secret for you
+  rules:
+    - host: testapp.elx.helsingborg.io     # must match the tls host above
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: echoserver-ingress   # the Service defined above
+                port:
+                  number: 80               # the Service's port (80), not the container's (8080)

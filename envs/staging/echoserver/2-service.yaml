@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: echoserver
+  namespace: default
+spec:
+  type: ClusterIP                          # internal only - the ingress is the public entrypoint
+  selector:
+    app.kubernetes.io/name: echoserver     # MUST match your Deployment's pod labels (see step 3)
+  ports:
+    - name: http
+      port: 80                             # port the Service exposes inside the cluster
+      targetPort: 8080                     # port the echoserver container listens on (see step 3)
+      protocol: TCP
