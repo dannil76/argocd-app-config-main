@@ -20,6 +20,6 @@ spec:
         - name: dockerhub-secret
       containers:
         - name: ols
-          image: webbutvecklinghelsingborg/gitops:openlitespeed-0.0.3
+          image: webbutvecklinghelsingborg/gitops:openlitespeed-0.0.4
           ports:
             - containerPort: 80
