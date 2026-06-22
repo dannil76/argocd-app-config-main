@@ -1,0 +1,37 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: municipio-deployment
+  namespace: webben
+  labels:
+    app: municipio-server
+spec:
+  revisionHistoryLimit: 1
+  replicas: 1
+  selector:
+    matchLabels:
+      app: municipio-server
+  template:
+    metadata:
+      labels:
+        app: municipio-server
+        expose: enabled
+        env: none
+    spec:
+      containers:
+        - name: municipio
+          image: ghcr.io/dannil76/municipio-deployment-labs:sha-27612fe0e2e135dc87a53c6a03f66de1dd955297
+          securityContext:
+            readOnlyRootFilesystem: false
+          resources:
+            requests:
+              memory: "256Mi"
+              cpu: "250m"
+            limits:
+              memory: "2048Mi"
+              cpu: "1000m"
+          ports:
+            - containerPort: 80
+          envFrom:
+            - secretRef:
+                name: municipio-secret

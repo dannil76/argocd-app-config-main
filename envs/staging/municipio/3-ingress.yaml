@@ -1,0 +1,27 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: municipio-server-ingress-route
+  namespace: webben
+  annotations:
+    cert-manager.io/cluster-issuer: "letsencrypt-prod"
+    nginx.ingress.kubernetes.io/backend-protocol: "HTTP"
+    nginx.ingress.kubernetes.io/force-ssl-redirect: "true"
+    nginx.ingress.kubernetes.io/proxy-body-size: "0"
+spec:
+  ingressClassName: nginx
+  tls:
+    - hosts:
+        - mun.elx.helsingborg.io       # your real (sub)domain, DNS pointed at the ingress IP
+      secretName: municipio-tls           # cert-manager creates and fills this Secret for you
+  rules:
+    - host: mun.elx.helsingborg.io     # must match the tls host above
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: municipio-server-service   # the Service defined above
+                port:
+                  number: 80               # the Service's port (80), not the container's (8080)
