@@ -1,4 +1,3 @@
 /.idea
 /scripts/apply-dockerhub_mrspex-sec.sh
 /scripts/apply-mun-mysql-sec.sh
-/envs/staging/my-app/.idea
