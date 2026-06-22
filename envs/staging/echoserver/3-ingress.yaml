@@ -18,7 +18,7 @@
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  name: echoserver-ingress
+  name: echoserver
   namespace: default
   annotations:
     # This single line wires in cert-manager. Switch to "letsencrypt-prod"
@@ -41,6 +41,6 @@ spec:
             pathType: Prefix
             backend:
               service:
-                name: echoserver-ingress   # the Service defined above
+                name: echoserver   # the Service defined above
                 port:
                   number: 80               # the Service's port (80), not the container's (8080)
