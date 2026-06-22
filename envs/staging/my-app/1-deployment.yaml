@@ -1,0 +1,25 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: ols
+  namespace: foo
+  labels:
+    app: ols
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: ols
+  template:
+    metadata:
+      labels:
+        app: ols
+    spec:
+      imagePullSecrets:
+        - name: dockerhub-secret
+      containers:
+        - name: ols
+          image: webbutvecklinghelsingborg/gitops:openlitespeed-0.0.4
+          ports:
+            - containerPort: 80

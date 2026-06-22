@@ -3,11 +3,11 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: ols
-  namespace: prod
+  namespace: bar
   labels:
     app: ols
 spec:
-  replicas: 1
+  replicas: 3
   selector:
     matchLabels:
       app: ols
