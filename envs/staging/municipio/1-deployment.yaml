@@ -20,7 +20,7 @@ spec:
     spec:
       containers:
         - name: municipio
-          image: ghcr.io/dannil76/municipio-deployment-labs:sha-27612fe0e2e135dc87a53c6a03f66de1dd955297
+          image: ghcr.io/dannil76/municipio-deployment-labs:sha-01ce11dda9f51a3a08a0c312b4979ea8d513a7b9
           securityContext:
             readOnlyRootFilesystem: false
           resources:
